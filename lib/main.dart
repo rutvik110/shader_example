@@ -13,20 +13,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const ShaderExample(title: 'Flutter Demo Home Page'),
+    return const MaterialApp(
+      home: ShaderExample(),
     );
   }
 }
 
 class ShaderExample extends StatefulWidget {
-  const ShaderExample({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const ShaderExample({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ShaderExample> createState() => _ShaderExampleState();
@@ -34,7 +30,7 @@ class ShaderExample extends StatefulWidget {
 
 class _ShaderExampleState extends State<ShaderExample> {
   Future<ui.FragmentProgram> compileShader() async {
-    final ByteData data = await rootBundle.load('shaders/gradient_shader.frag');
+    final ByteData data = await rootBundle.load('assets/shader.sprv');
     final fragmentProgram =
         await ui.FragmentProgram.compile(spirv: data.buffer);
 
@@ -43,7 +39,6 @@ class _ShaderExampleState extends State<ShaderExample> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     compileShader();
   }
@@ -51,14 +46,10 @@ class _ShaderExampleState extends State<ShaderExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: FutureBuilder<ui.FragmentProgram>(
         future: compileShader(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            final resolution = MediaQuery.of(context).size;
             return ShaderMask(
               child: const SizedBox.expand(
                 child: ColoredBox(
@@ -67,11 +58,11 @@ class _ShaderExampleState extends State<ShaderExample> {
               ),
               shaderCallback: (rect) {
                 return snapshot.data!.shader(
-                  floatUniforms: Float32List.fromList([
-                    resolution.width,
-                    resolution.height,
-                  ]),
-                  samplerUniforms: [],
+                  floatUniforms: Float32List.fromList(
+                    [
+                      // your inputs in double
+                    ],
+                  ),
                 );
               },
             );

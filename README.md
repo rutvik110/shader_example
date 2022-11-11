@@ -2,7 +2,12 @@
 
 A new Flutter project.
 
-## Getting Started
+## Compile GLSL to SPIRV through glslc 
+
+```
+./compiler/bin/glslc --target-env=opengl -fshader-stage=fragment -o assets/shader.sprv assets/shader.glsl
+
+```
 
 This project is a starting point for a Flutter application.
 
