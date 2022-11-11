@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shader_example/my_shader/umbra_shader_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: ShaderExample(),
+      home: UmbraShaderView(),
     );
   }
 }
@@ -60,7 +61,9 @@ class _ShaderExampleState extends State<ShaderExample> {
                 return snapshot.data!.shader(
                   floatUniforms: Float32List.fromList(
                     [
-                      // your inputs in double
+                      0,
+                      0,
+                      1,
                     ],
                   ),
                 );
