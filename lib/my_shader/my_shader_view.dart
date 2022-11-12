@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:shader_example/my_shader/my_shader.dart';
 import 'package:umbra_flutter/umbra_flutter.dart';
 
-class UmbraShaderView extends StatefulWidget {
-  const UmbraShaderView({Key? key}) : super(key: key);
+class MyShaderView extends StatefulWidget {
+  const MyShaderView({Key? key}) : super(key: key);
 
   @override
-  State<UmbraShaderView> createState() => _MyShaderState();
+  State<MyShaderView> createState() => _MyShaderState();
 }
 
-class _MyShaderState extends State<UmbraShaderView> {
+class _MyShaderState extends State<MyShaderView> {
   late Future<MyShader> helloWorld;
 
   @override
